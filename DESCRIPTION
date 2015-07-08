@@ -1,0 +1,14 @@
+Package: Rgrowth
+Type: Package
+Title: Post-disturbance regrowth monitoring with dense LTS
+Version: 1.0
+Date: 2015-02-10
+Author: Ben DeVries
+Maintainer: <devries.br@gmail.com>
+Description: Monitors recovery of a time series signal after a disturbance (breakpoint) is signalled. Designed for Landsat time series (LTS)
+License: What license is it under?
+Depends:
+    R (>= 3.0.0),
+    bfastSpatial,
+    strucchange,
+    zoo
