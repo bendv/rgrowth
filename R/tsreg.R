@@ -2,14 +2,17 @@
 #' @description Structural monitoring method for post-disturbance forest regrowth in a time series
 #' 
 #' @param x Time series. Can be an object of type \code{numeric} (vector), \code{zoo} or \code{ts}
-#' @param dates Date. Vector with length \code{length(x)} with observation dates. If omitted, \code{x} will simply be an ordered series with arbitrary (regularly spaced) dates
 #' @param change Numeric. Date of original disturbance. See \code{\link{bfastmonitor}} for a potential method to determine this on a time series.
+#' @param h Numeric. Bandwidth of the MOSUM monitoring window. See \code{\link{bfastmonitor}} for more information.
+#' @param dates Date. Vector with length \code{length(x)} with observation dates. If omitted, \code{x} will simply be an ordered series with arbitrary (regularly spaced) dates
+#' @param type Character. Type of time series. Can be either "irregular" (include gaps) or "16-day" (ie. MODIS-type)
 #' @param startOffset Numeric. Number of (decimal) years by which to offset the start of the regrowth monitoring process. Can also be set to "floor", in which case the \code{floor} of the change date will be taken as the start of the monitoring period.
 #' @param formula Formula to be fit to stable history period (see \code{\link{bfastmonitor}})
 #' @param order Numeric. Order of the harmonic term of \code{formula} (see \code{\link{bfastmonitor}})
 #' @param history Method or pre-determined period to use for history model (see \code{\link{bfastmonitor}})
-#' @param level see \code{\link{bfastmonitor}}
+#' @param level Numeric. See \code{\link{bfastmonitor}}
 #' @param w Numeric. Number of years before a regrowth flag is allowed to be assigned.
+#' @param s Numeric. Number of years in which MOSUM values must be below the critical threshold for a regrowth label to be assigned.
 #' @param plot Logical. Plot the results?
 #' @param ylabs Character. Vector of length 2 with y labels of the data time series and MOSUM plots, respectively 
 #' 
@@ -35,13 +38,16 @@
 #' reg <- tsreg(ndmi, change = bfm$breakpoint, h = 0.5, plot = TRUE)
 #' print(reg)
 #' 
-#' reg2 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor", h = 0.5, plot = TRUE)
+#' reg2 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor", 
+#' h = 0.5, plot = TRUE)
 #' print(reg2)
 #' 
-#' reg3 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor", h = 0.5, history='all', plot=TRUE)
+#' reg3 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor", 
+#' h = 0.5, history='all', plot=TRUE)
 #' print(reg3)
 #' 
-#' reg4 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor", h = 0.5, history='all', s=0, plot=TRUE)
+#' reg4 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor", 
+#' h = 0.5, history='all', s=0, plot=TRUE)
 #' print(reg4)
 
 tsreg <- function(x, change, h, dates = NULL, type = c("irregular", "16-day"), startOffset = 0, formula=response~harmon, order=1, history='BP', level=0.05, w = 3, s = 1, plot = FALSE, ylabs = c('data', '|MOSUM|')) {

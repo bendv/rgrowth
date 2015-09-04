@@ -14,7 +14,11 @@ tsreg(x, change, h, dates = NULL, type = c("irregular", "16-day"),
 
 \item{change}{Numeric. Date of original disturbance. See \code{\link{bfastmonitor}} for a potential method to determine this on a time series.}
 
+\item{h}{Numeric. Bandwidth of the MOSUM monitoring window. See \code{\link{bfastmonitor}} for more information.}
+
 \item{dates}{Date. Vector with length \code{length(x)} with observation dates. If omitted, \code{x} will simply be an ordered series with arbitrary (regularly spaced) dates}
+
+\item{type}{Character. Type of time series. Can be either "irregular" (include gaps) or "16-day" (ie. MODIS-type)}
 
 \item{startOffset}{Numeric. Number of (decimal) years by which to offset the start of the regrowth monitoring process. Can also be set to "floor", in which case the \code{floor} of the change date will be taken as the start of the monitoring period.}
 
@@ -24,9 +28,11 @@ tsreg(x, change, h, dates = NULL, type = c("irregular", "16-day"),
 
 \item{history}{Method or pre-determined period to use for history model (see \code{\link{bfastmonitor}})}
 
-\item{level}{see \code{\link{bfastmonitor}}}
+\item{level}{Numeric. See \code{\link{bfastmonitor}}}
 
 \item{w}{Numeric. Number of years before a regrowth flag is allowed to be assigned.}
+
+\item{s}{Numeric. Number of years in which MOSUM values must be below the critical threshold for a regrowth label to be assigned.}
 
 \item{plot}{Logical. Plot the results?}
 
@@ -49,13 +55,16 @@ bfm <- bfastmonitor(x, start=c(2005, 1), formula=response~harmon, order=1, plot=
 reg <- tsreg(ndmi, change = bfm$breakpoint, h = 0.5, plot = TRUE)
 print(reg)
 
-reg2 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor", h = 0.5, plot = TRUE)
+reg2 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor",
+h = 0.5, plot = TRUE)
 print(reg2)
 
-reg3 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor", h = 0.5, history='all', plot=TRUE)
+reg3 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor",
+h = 0.5, history='all', plot=TRUE)
 print(reg3)
 
-reg4 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor", h = 0.5, history='all', s=0, plot=TRUE)
+reg4 <- tsreg(ndmi, change = bfm$breakpoint, startOffset = "floor",
+h = 0.5, history='all', s=0, plot=TRUE)
 print(reg4)
 }
 \author{

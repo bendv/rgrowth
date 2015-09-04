@@ -1,3 +1,4 @@
+#' @exportClass tsreg
 #' @export
 
 print.tsreg <- function(x) {
