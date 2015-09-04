@@ -34,7 +34,7 @@ regSpatial <- function(x, change, h=0.5, ..., filename = NULL, mc.cores = 1) {
     if(is.na(bkp)) {
       res <- rep(NA, 4)
     } else {
-      err <- try(tsreg(x=lts, change=bkp, h=h, ...), silent = FALSE)
+      err <- try(tsreg(x=lts, change=bkp, h=h, ...), silent = TRUE)
       if(class(err) == 'try-error') {
         res <- c(z[1], -9999, NA, NA)
       } else {
