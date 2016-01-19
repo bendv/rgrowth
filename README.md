@@ -1,12 +1,13 @@
-# Rgrowth
+# rgrowth
 Post-disturbance regrowth monitoring using Landsat Time Series (LTS).
 
-Install using `devtools`:
+`bfastSpatial` is required for `rgrowth`. Both can be installed using `devtools`:
 
 ```
 library(devtools)
-install_git('bendv/Rgrowth')
-library(Rgrowth)
+install_github('dutri001/bfastSpatial')
+install_github('bendv/rgrowth')
+library(rgrowth)
 ```
 
-Tutorial coming soon...
+A short tutorial is available [here](http://bendv.github.io/rgrowth). At the moment, the tutorial only covers single-pixel time series. Check back later for updates to the tutorial, including a mapping component!

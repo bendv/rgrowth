@@ -1,4 +1,4 @@
-Package: Rgrowth
+Package: rgrowth
 Type: Package
 Title: Post-disturbance regrowth monitoring with dense LTS
 Version: 1.0
