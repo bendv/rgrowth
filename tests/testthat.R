@@ -1,4 +1,4 @@
 library(testthat)
-library(Rgrowth)
+library(rgrowth)
 
-test_check("Rgrowth")
+test_check("rgrowth")

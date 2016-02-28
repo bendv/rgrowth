@@ -1,4 +1,4 @@
-library(Rgrowth)
+library(rgrowth)
 context("output of tsreg")
 
 data(ndmi)
